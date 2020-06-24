@@ -16,7 +16,7 @@ class Page{
 
     public function __construct($opts = array(), $tpl_dir = "/views/"){
 
-      $this->defaults["data"] ["session"] = $_SESSION;
+     
 
 	    $this->options = array_merge($this->defaults, $opts);
 
@@ -27,13 +27,19 @@ class Page{
 					"debug"         => false // set to false to improve the speed
 				   );
 
-	Tpl::configure( $config );
+	  Tpl::configure( $config );
 
-     $this->tpl = new Tpl;
+       $this->tpl =  new Tpl;
 
-     $this->setData($this->options["data"]);
+       /*foreach ($this->options["data"] as $key => $value) {
+           $this->tpl->assign($key, $value);
+       }*/
 
-     if($this->options["header"] === true)$this->tpl->draw("header");//essa condição se for verdaeira carrega o template igualmente no footer
+
+       $this->setData($this->options["data"]);
+
+       //desenhando tamplate na tela do header
+      if($this->options["header"] === true) $this->tpl->draw("header");//essa condição se for verdaeira carrega o template igualmente no footer
 
 }  
 
